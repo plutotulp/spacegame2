@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlwu55xnjcv77"]
+
+[ext_resource type="Script" path="res://scenes/Ship.gd" id="1_5yqyf"]
+[ext_resource type="Texture2D" uid="uid://bo4f6p75ml40c" path="res://assets/qbert.png" id="2_snhpy"]
+
+[node name="Ship" type="Area2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_5yqyf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_snhpy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-369, 280, -298, 257, -243, 250, -165, 220, -90, 176, 20, 160, 166, 108, 373, 60, 368, -46, 236, -71, 197, -75, 124, -107, 38, -136, -8, -162, -209, -205, -370, -277, -373, -216, -362, -27)
