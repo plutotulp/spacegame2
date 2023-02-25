@@ -24,6 +24,6 @@ func move(delta):
 	velocity = velocity.normalized() * speed
 	position += velocity * delta
 
-func start(_position: Vector2):
+func init(_position: Vector2):
 	position = _position
 	

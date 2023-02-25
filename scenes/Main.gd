@@ -11,6 +11,7 @@ func _ready():
 func _process(delta):
 	pass
 
+
 func new_game():
-	$Player.start($StartingPosition.position)
+	$Player.init($StartingPosition.position)
 	$Player.show()
