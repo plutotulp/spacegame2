@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://7p7505vf3f37"]
+
+[ext_resource type="Script" path="res://scenes/staaaargh.gd" id="1_bip24"]
+[ext_resource type="AudioStream" uid="uid://hoogpmp56ie0" path="res://assets/daagh.ogg" id="2_01ei0"]
+[ext_resource type="Texture2D" uid="uid://d3g2of1t2aggr" path="res://assets/staaargh.png" id="2_1knhe"]
+[ext_resource type="AudioStream" uid="uid://cl8seodrb3y41" path="res://assets/hum.ogg" id="3_c2hvo"]
+
+[sub_resource type="Curve2D" id="Curve2D_b5osj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, 1, 0, 0, 0, 0, -76, -106, 0, 0, 0, 0, -9, -202, 0, 0, 0, 0, 261, -255, 0, 0, 0, 0, 415, 73, 0, 0, 0, 0, 347, 244, 0, 0, 0, 0, -3, 355, 0, 0, 0, 0, -84, 263, 0, 0, 0, 0, -63, 194, 0, 0, 0, 0, -12, 189, 0, 0, 0, 0, 86, 205, 0, 0, 0, 0, 156, 190, 0, 0, 0, 0, 259, 148, 0, 0, 0, 0, 266, 41, 0, 0, 0, 0, 184, -16, 0, 0, 0, 0, 115, -53, 0, 0, 0, 0, 172, -123, 0, 0, 0, 0, 408, -220, 0, 0, 0, 0, 616, -155, 0, 0, 0, 0, 793, 123, 0, 0, 0, 0, 571, 274, 0, 0, 0, 0, 268, 156, 0, 0, 0, 0, 69, 19, 0, 0, 0, 0, -253, -227, 0, 0, 0, 0, -496, -285, 0, 0, 0, 0, -702, -101, 0, 0, 0, 0, -674, 65, 0, 0, 0, 0, -447, 32, 0, 0, 0, 0, -394.804, -63.4733, 0, 0, 0, 0, -244, -97, 0, 0, 0, 0, -117, -78, 0, 0, 0, 0, -100, 37, 0, 0, 0, 0, -168, 201, 0, 0, 0, 0, -231, 296, 0, 0, 0, 0, -47, 319, 0, 0, 0, 0, 280, 327, 0, 0, 0, 0, 502, 186, 0, 0, 0, 0, 361, 151, 0, 0, 0, 0, 216, 233, 0, 0, 0, 0, 94, 159)
+}
+point_count = 40
+
+[node name="Staaaargh" type="Path2D"]
+curve = SubResource("Curve2D_b5osj")
+script = ExtResource("1_bip24")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, 1)
+rotation = -2.19457
+rotates = false
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D"]
+position = Vector2(1.39578, -0.227573)
+rotation = 2.19457
+collision_layer = 4
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/Area2D"]
+scale = Vector2(0.2, 0.238095)
+texture = ExtResource("2_1knhe")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFollow2D/Area2D"]
+scale = Vector2(0.2, 0.238095)
+polygon = PackedVector2Array(92.5, -394, 132.3, -107, 136.6, -107, 386.5, -76, 386.5, -66.6, 187.5, 71, 293.5, 296.6, 293.5, 299.4, 297.5, 305.4, 297.5, 308.8, 294.3, 312, 291, 312, 42.4, 166.8, -288.9, 393, -290.8, 393, -302.5, 402, -314.5, 402, -314.5, 399.6, -169.2, 54.3, -386.5, -112.2, -386.5, -122, -384.5, -122, -94.5, -135.9, -53.8, -224, -52.6, -224, -7.60001, -300, -6.39999, -300, 82.5, -401.7, 92.5, -402)
+
+[node name="HealthBar" type="ProgressBar" parent="PathFollow2D/Area2D"]
+offset_left = -69.0
+offset_top = 107.0
+offset_right = 74.0
+offset_bottom = 134.0
+show_percentage = false
+
+[node name="Hum" type="AudioStreamPlayer" parent="PathFollow2D/Area2D"]
+unique_name_in_owner = true
+stream = ExtResource("3_c2hvo")
+autoplay = true
+
+[node name="Daagh" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_01ei0")
+
+[connection signal="area_entered" from="PathFollow2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="PathFollow2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="finished" from="Daagh" to="." method="_on_daagh_finished"]

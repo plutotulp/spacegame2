@@ -1,13 +1,29 @@
 extends Node2D
 
-func _on_world_box_body_shape_exited(_body_rid, body, _body_shape_index, _local_shape_index):
-	# All bodies moving about here must know what to do when they leave the world area
-	print("A body shape existed the world")
-	body.on_exit_world()
+@onready var score: int = 0
+
+signal game_end
+
+func _ready():
+	show_score()
+	%Staaaargh.connect("give_score", on_give_score)
+
+func show_score():
+	%Score.text = "%s" % score
+
+func add_score(amount):
+	score += amount
+	show_score()
+
+func on_give_score(value: int):
+	add_score(value)
 
 func _on_ship_died():
-	print("Ship died!")
+	game_end.emit()
 
-func _on_world_box_body_exited(body):
-	# All bodies moving about here must know what to do when they leave the world area
-	body.on_exit_world()
+func _on_game_end():
+	%GameOver.visible = true
+	%Ohoh.play()
+	for child in get_children():
+		if child.has_method("on_game_end"):
+			child.on_game_end()

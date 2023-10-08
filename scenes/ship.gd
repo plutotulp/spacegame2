@@ -35,6 +35,8 @@ func fire_main():
 	var parent = get_parent()
 	parent.add_child(shot)
 
-func on_exit_world():
-	died.emit()
+func on_game_end():
 	queue_free()
+
+func on_collide_with_enemy(enemy):
+	died.emit()
