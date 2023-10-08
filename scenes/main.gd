@@ -10,5 +10,4 @@ func _on_ship_died():
 
 func _on_world_box_body_exited(body):
 	# All bodies moving about here must know what to do when they leave the world area
-	print("A body existed the world")
 	body.on_exit_world()
