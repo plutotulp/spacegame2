@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwcxxywr2x1dw"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_g4q3k"]
+[ext_resource type="PackedScene" uid="uid://djy1jacv7o812" path="res://scenes/ship.tscn" id="2_1niul"]
+[ext_resource type="PackedScene" uid="uid://7p7505vf3f37" path="res://scenes/staaaargh.tscn" id="3_7g8on"]
+[ext_resource type="AudioStream" uid="uid://bajib5dbypdsv" path="res://assets/oh-oh.ogg" id="4_0fotk"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_g4q3k")
+
+[node name="Ship" parent="." instance=ExtResource("2_1niul")]
+unique_name_in_owner = true
+position = Vector2(239, 319)
+
+[node name="Staaaargh" parent="." instance=ExtResource("3_7g8on")]
+unique_name_in_owner = true
+position = Vector2(522, 209)
+scale = Vector2(0.700435, 0.700435)
+
+[node name="Score" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 1024.0
+offset_top = 14.0
+offset_right = 1064.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="Ohoh" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_0fotk")
+volume_db = -10.65
+
+[connection signal="died" from="Ship" to="." method="_on_ship_died"]

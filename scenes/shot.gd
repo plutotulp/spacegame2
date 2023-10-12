@@ -20,5 +20,5 @@ func on_game_end():
 	queue_free()
 
 func on_collide_with_enemy(enemy):
-	enemy.damage(damage)
+	enemy.take_damage(damage)
 	queue_free()

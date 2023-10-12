@@ -1,29 +1,27 @@
 extends Node2D
 
-@onready var score: int = 0
+# States:
+#   0 - main menu
+#   1 - running game
+@onready var state = 0
 
-signal game_end
+@onready var game_scene = preload("res://scenes/game.tscn")
+var game
 
-func _ready():
-	show_score()
-	%Staaaargh.connect("give_score", on_give_score)
+func _input(event):
+	if state == 0 and event.is_action_pressed("start_game"):
+		start_game()
 
-func show_score():
-	%Score.text = "%s" % score
-
-func add_score(amount):
-	score += amount
-	show_score()
-
-func on_give_score(value: int):
-	add_score(value)
-
-func _on_ship_died():
-	game_end.emit()
-
-func _on_game_end():
+func start_game():
+	%GameOver.visible = false
+	%StartGame.visible = false
+	game = game_scene.instantiate()
+	game.connect("game_over", _on_game_game_over)
+	add_child(game)
+	state = 1
+	
+func _on_game_game_over():
 	%GameOver.visible = true
-	%Ohoh.play()
-	for child in get_children():
-		if child.has_method("on_game_end"):
-			child.on_game_end()
+	%StartGame.visible = true
+	game.queue_free()
+	state = 0

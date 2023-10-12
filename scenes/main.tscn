@@ -1,29 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0oxxvhi65hkj"]
+[gd_scene load_steps=2 format=3 uid="uid://c0oxxvhi65hkj"]
 
-[ext_resource type="PackedScene" uid="uid://djy1jacv7o812" path="res://scenes/ship.tscn" id="1_f7ti1"]
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_f4267"]
-[ext_resource type="PackedScene" uid="uid://7p7505vf3f37" path="res://scenes/staaaargh.tscn" id="3_vew0r"]
-[ext_resource type="AudioStream" uid="uid://bajib5dbypdsv" path="res://assets/oh-oh.ogg" id="4_ltwpu"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_jygcx"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_f4267")
-
-[node name="Ship" parent="." instance=ExtResource("1_f7ti1")]
-position = Vector2(239, 319)
-
-[node name="Staaaargh" parent="." instance=ExtResource("3_vew0r")]
-unique_name_in_owner = true
-position = Vector2(522, 209)
-scale = Vector2(0.700435, 0.700435)
-
-[node name="Score" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = 1024.0
-offset_top = 14.0
-offset_right = 1064.0
-offset_bottom = 105.0
-theme_override_font_sizes/font_size = 64
-text = "0"
+script = ExtResource("1_jygcx")
 
 [node name="GameOver" type="Label" parent="."]
 unique_name_in_owner = true
@@ -35,11 +15,15 @@ offset_bottom = 214.0
 scale = Vector2(10.3229, 11.2494)
 text = "GAME OVER"
 
-[node name="Ohoh" type="AudioStreamPlayer" parent="."]
+[node name="StartGame" type="Label" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_ltwpu")
-volume_db = -10.65
+offset_left = 242.0
+offset_top = 41.0
+offset_right = 363.0
+offset_bottom = 93.0
+scale = Vector2(5.41596, 3.82798)
+theme_override_colors/font_color = Color(0.976471, 0.266667, 0, 1)
+text = "Press SPACE to 
+start new game"
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
-[connection signal="game_end" from="." to="." method="_on_game_end"]
-[connection signal="died" from="Ship" to="." method="_on_ship_died"]
